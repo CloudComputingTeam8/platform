@@ -62,7 +62,7 @@ for(AppBean app:apps) {%>
 								<%=app.getPrice() %> peanut
 							</p>
 							<p>
-								<a class="btn btn-primary" href="#">
+								<a class="btn btn-primary" href="http://localhost:8080/CloudComputingTeam8/runApp?appID=<%=app.getAppID()%>">
 								<%if(app.getAuthorisation())
 									out.println("Run");
 									else

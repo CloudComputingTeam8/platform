@@ -36,6 +36,9 @@ section,
 summary {
   display: block;
 }
+textarea {
+    width: auto;
+}
 audio,
 canvas,
 progress,
@@ -50,6 +53,14 @@ audio:not([controls]) {
 [hidden],
 template {
   display: none;
+}
+div#applist {
+  font-size: 40px;
+  line-height: 35px;
+}
+input[type="checkbox"] {
+  width:25px;
+  height:25px;
 }
 a {
   background-color: transparent;

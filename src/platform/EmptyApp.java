@@ -1,33 +1,17 @@
 package platform;
 
-/**
- * EmptyApp is a mock-up of the app that does nothing.  We use this in place
- * of apps when we cannot find the app we really wanted, perhaps because we
- * misspelled its pathname or class name.
- * 
- * @author Anthony J H Simons
- * @version 1.0
- */
-public class EmptyApp  implements AppInterface {
+import java.io.IOException;
 
-	/**
-	 * Creates this EmptyApp.
-	 */
-	public EmptyApp() {
-	}
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-	/**
-	 * Starts this EmptyApp; does nothing.
-	 */
+public class EmptyApp implements AppInterface {
+
 	@Override
-	public void start() {
-	}
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 
-	/**
-	 * Stops this EmptyApp; does nothing.
-	 */
-	@Override
-	public void stop() {
 	}
 
 }

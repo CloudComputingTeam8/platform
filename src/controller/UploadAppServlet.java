@@ -23,7 +23,7 @@ public class UploadAppServlet extends HttpServlet {
 	 private static final String SAVE_DIR = "uploadedFiles";
 	 private static final String destdir = "extractorFile";
 	 private DBDriver driver;
-	 private static String successURL = "/login";
+	 private static String successURL = "index.jsp";
 
 	 private String extractFileName(Part part) {
 		 String contentDisp = part.getHeader("content-disposition");
@@ -51,12 +51,11 @@ public class UploadAppServlet extends HttpServlet {
 			 File fileSaveDir = new File(savePath);
 			 if (!fileSaveDir.exists())
 				 fileSaveDir.mkdir();
-			 for (Part part : req.getParts()) {
-				 String fileName = extractFileName(part);
-				 System.out.println("fileName: "+fileName);
-				 part.write(savePath + File.separator + fileName);
-				 extractor(savePath + File.separator + fileName,extractorPath);
-			 }
+			 Part part = req.getPart("file");
+			 String fileName = extractFileName(part);
+			 System.out.println("fileName: "+fileName);
+			 part.write(savePath + File.separator + fileName);
+			 extractor(savePath + File.separator + fileName,extractorPath);
 			 
 			 HttpSession session = req.getSession();
 			 UserBean user = (UserBean) session.getAttribute("user");

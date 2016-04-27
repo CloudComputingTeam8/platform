@@ -25,6 +25,14 @@
   	<servlet-name>SignUp</servlet-name>
   	<url-pattern>/signup</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>RunApp</servlet-name>
+  	<servlet-class>controller.RunAppServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RunApp</servlet-name>
+  	<url-pattern>/runApp</url-pattern>
+  </servlet-mapping>
    <resource-ref>
       <description>DB Connection</description>
       <res-ref-name>jdbc/TestDB</res-ref-name>
