@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/signup.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/styles0.css" rel="stylesheet" type="text/css">
   </head><body>
@@ -23,7 +24,7 @@
                 <div class="tab-pane active" id="panel-724981">
                   <div id="login" class="layer">
                     <div>
-                      <form action="login" method="post">
+                      <form action="form_action.asp" method="get">
                         <br>User name:
                         <input type="text" name="userName">
                         <br>
@@ -38,17 +39,17 @@
                 <div class="tab-pane" id="panel-477991">
                   <div id="signup" class="layer">
                     <div>
-                      <form action="signup" method="post">
+                      <form action="form_action.asp" method="get" onsubmit="event.preventDefault(); validateMyForm();">
                         <br>User name:
                         <input type="text" name="userName">
                         <br>
                         <br>Password:
-                        <input type="text" name="password">
+                        <input id="firstP" type="text" name="password">
                         <br>
                         <br>Confirm:
-                        <input type="text" name="password2">
+                        <input id="secondP" type="text" name="password2">
                         <br><br>
-                        <input type="submit" value="Sign Up">
+                        <input id="signupSub" type="submit" value="Log in">
                       </form>
                     </div>
                   </div>
