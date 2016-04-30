@@ -8,8 +8,8 @@ public class AppDetailBean extends AppBean {
 	}
 	
 	public AppDetailBean(String name, String owned, int price, int appID, 
-			String status, int pv, int income){
-		super(name,owned,price,appID);
+			String status, int pv, int income, String image){
+		super(name,owned,price,appID,image);
 		this.status = status;
 		this.pv = pv;
 		this.income = income;

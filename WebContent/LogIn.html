@@ -12,6 +12,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="tabbable" id="tabs-724690">
+            <!--  there is a nav tab bar that can choose log in or sign up -->
               <ul class="nav nav-tabs">
                 <li class="active">
                   <a href="#panel-724981" data-toggle="tab">Log In</a>
@@ -22,34 +23,48 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="panel-724981">
+                  <!--the first tab is log in -->
                   <div id="login" class="layer">
                     <div>
-                      <form action="form_action.asp" method="get">
+                      <form action="login" method="post">
                         <br>User name:
                         <input type="text" name="userName">
                         <br>
                         <br>Password:
-                        <input type="text" name="password">
+                        <input type="password" name="password" >
+                        <label id="loginpass" class="hide"></label>
                         <br><br>
                         <input type="submit" value="Log in">
                       </form>
                     </div>
                   </div>
                 </div>
+                <!--The second tab is sign up, there are some limited-->
                 <div class="tab-pane" id="panel-477991">
                   <div id="signup" class="layer">
                     <div>
-                      <form action="form_action.asp" method="get" onsubmit="event.preventDefault(); validateMyForm();">
+                       <form id="personRegForm" class="form" action="signup" method="post">
                         <br>User name:
-                        <input type="text" name="userName">
+                        <!-- <input type="text" name="userName"> -->
+                         <input type="text" id="username" name="username" class="text">
+                         <label id="username_msg" class="hide"></label>
                         <br>
                         <br>Password:
-                        <input id="firstP" type="text" name="password">
+                        
+                        <input type="password" id="password" name="password" class="text">
+ 
+                        <label id="pwd_msg" class="hide"></label>
                         <br>
                         <br>Confirm:
-                        <input id="secondP" type="text" name="password2">
+                        <!-- password and username cannot empty, two times should same -->
+                        <input type="password" id="pwdRepeat" name="pwdRepeat" class="text">
+ 
+                        <label id="pwdRepeat_msg" class="hide"></label>
+                        <br>
+                        <input type="checkbox" name="checkbo" id="checkbox_id0" value="0" />A Developer<br>
+                        <p id="description">If you want to upload your apps, you can choose be a developer, If not your account can only but apps.</p>
                         <br><br>
-                        <input id="signupSub" type="submit" value="Log in">
+                        <input id="signupSub" type="submit" value="Sign up">
                       </form>
                     </div>
                   </div>

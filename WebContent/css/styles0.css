@@ -51,6 +51,9 @@ audio:not([controls]) {
 template {
   display: none;
 }
+p#description {
+    color: blue;
+}
 a {
   background-color: transparent;
 }
@@ -1092,7 +1095,8 @@ body {
   font-family: "Miama";
   font-size: 14px;
   line-height: 1.42857143;
-  background:url(../data/background.png); 
+  background:url(../data/background.jpg); 
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   color: #b0e1ef;
   background-color: #000000;
@@ -1106,7 +1110,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337cbb;
+  color: #F0DB4A;
   text-decoration: none;
 }
 a:hover,
@@ -1196,7 +1200,7 @@ h6,
   font-family: "Kaushan Script";
   font-weight: 500;
   line-height: 1.1;
-  color: inherit;
+  color: #EEA127;
 }
 h1 small,
 h2 small,
@@ -3936,8 +3940,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #F7F2F2;
-  background-color: #000000;
+  color: rgb(57, 128, 190);
+  background-color: #f0db4a;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;

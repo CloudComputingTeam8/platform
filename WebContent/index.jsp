@@ -47,10 +47,11 @@
 		<div class="span9">
 			<ul class="thumbnails">
 <% List<AppBean> apps= (List<AppBean>)session.getAttribute("appOverview");
-for(AppBean app:apps) {%>			
+for(AppBean app:apps) {
+	String imagePath = application.getRealPath("/") + "imageFile\\" + app.getImage();%>			
 				<li class="span3">
 					<div class="thumbnail">
-						<img alt="100x100" src="data/Under_my_feet_ok.png" />
+						<img alt="100x100" src="<%=imagePath %>" />
 						<div class="caption">
 							<h3>
 								<%=app.getName() %>
@@ -62,12 +63,12 @@ for(AppBean app:apps) {%>
 								<%=app.getPrice() %> peanut
 							</p>
 							<p>
-								<a class="btn btn-primary" href="http://localhost:8080/CloudComputingTeam8/runApp?appID=<%=app.getAppID()%>">
-								<%if(app.getAuthorisation())
-									out.println("Run");
-									else
-										out.println("Buy");%>
-								</a>
+								
+								<%if(app.getAuthorisation()){%>
+								<a class="btn btn-primary" href="http://localhost:8080/CloudComputingTeam8/runApp?appID=<%=app.getAppID()%>">Run</a>
+								<% }else{%>
+								<a class="btn btn-primary" href="http://localhost:8080/CloudComputingTeam8/buyApp?appID=<%=app.getAppID()%>">Buy</a>
+								<%} %>
 								<a class="btn" href="#">Detail</a>
 							</p>
 						</div>

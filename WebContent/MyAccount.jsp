@@ -59,6 +59,10 @@
                 <li><%= app.getName() %></li>
                 <%} %>
               </ul>
+              <ul>
+              <h3>Bank Credit</h3>
+              <%=user.getCredit() %>
+              </ul>
             </div>
             <div class="span6">
               <p>

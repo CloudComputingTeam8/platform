@@ -8,15 +8,17 @@ public class AppBean implements Serializable {
 	private int price;
 	private int appID;
 	private boolean authorisation = false; 
+	private String image;
 	
 	public AppBean(){		
 	}
 	
-	public AppBean(String name, String owned, int price, int appID){
+	public AppBean(String name, String owned, int price, int appID, String image){
 		this.name = name;
 		this.owned = owned;
 		this.price = price;
 		this.appID = appID;
+		this.image = image;
 	}
 	
 	public void setAuthorisation(boolean authorisation){
@@ -41,5 +43,9 @@ public class AppBean implements Serializable {
 	
 	public boolean getAuthorisation(){
 		return authorisation;
+	}
+	
+	public String getImage(){
+		return image;
 	}
 }

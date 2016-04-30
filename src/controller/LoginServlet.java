@@ -55,31 +55,33 @@ public class LoginServlet extends HttpServlet {
 	
 	public UserBean getUser(String username, String password) throws SQLException{
 		UserBean user = null;
-		String query = "SELECT password,userID FROM userinfo WHERE username=\""+username+"\" ";
+		String query = "SELECT * FROM userinfo WHERE username=\""+username+"\" ";
 		ResultSet result = driver.executeQuery(query);
 		if(!result.next())
 			errorMessage = "Unknown user";
 		else if(!result.getString("password").equals(password))
 			errorMessage = "Incorrect password";
 		else {
-			int authorisation = 1;
+			int authorisation = result.getInt("authority");
 			int userID = result.getInt("userID");
-			user = new UserBean(username,authorisation,userID);
+			int credit = result.getInt("credit");
+			user = new UserBean(username,authorisation,userID,credit);
 		}		
 		return user;
 	}
 	
 	public List<AppBean> getAppOverview() throws SQLException{
 		List<AppBean> apps = new ArrayList<AppBean>();
-		String query = "SELECT userinfo.username, appinfo.name, appinfo.price, appinfo.appID FROM userinfo, appinfo "
+		String query = "SELECT userinfo.username, appinfo.name, appinfo.price, appinfo.appID, appinfo.image FROM userinfo, appinfo "
 				+ "WHERE userinfo.userID = appinfo.owned";
 		ResultSet result = driver.executeQuery(query);
 		while(result.next()){
 			 String name = result.getString("appinfo.name");
 			 String owned = result.getString("userinfo.username");
+			 String image = result.getString("appinfo.image");
 			 int price = result.getInt("appinfo.price");
 			 int appID = result.getInt("appinfo.appID");
-			 AppBean app = new AppBean(name,owned,price,appID);
+			 AppBean app = new AppBean(name,owned,price,appID,image);
 			 apps.add(app);
 		}
 		
@@ -113,7 +115,8 @@ public class LoginServlet extends HttpServlet {
 			 String status = result.getString("status");
 			 int pv = result.getInt("pv");
 			 int income = result.getInt("income");
-			 AppDetailBean app = new AppDetailBean(name,user.getUsername(),price,appID,status,pv,income);
+			 String image = result.getString("image");
+			 AppDetailBean app = new AppDetailBean(name,user.getUsername(),price,appID,status,pv,income,image);
 			 apps.add(app);
 			 
 			 for (AppBean a:allApps){

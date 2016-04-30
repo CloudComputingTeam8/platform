@@ -36,9 +36,6 @@ section,
 summary {
   display: block;
 }
-textarea {
-    width: auto;
-}
 audio,
 canvas,
 progress,
@@ -62,6 +59,10 @@ input[type="checkbox"] {
   width:25px;
   height:25px;
 }
+input#price {
+    width: 100px;
+    margin-right: 10px;
+}
 a {
   background-color: transparent;
 }
@@ -84,7 +85,7 @@ dfn {
   font-style: italic;
 }
 h1 {
-  font-size: 2em;
+  font-size: 38.5px;
   margin: 0.67em 0;
 }
 mark {
@@ -120,6 +121,9 @@ hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
+}
+textarea {
+    width: auto;
 }
 pre {
   overflow: auto;

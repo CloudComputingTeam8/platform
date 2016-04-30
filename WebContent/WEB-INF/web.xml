@@ -31,7 +31,15 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>RunApp</servlet-name>
-  	<url-pattern>/runApp</url-pattern>
+  	<url-pattern>/runApp</url-pattern>  	
+  </servlet-mapping>
+    <servlet>
+  	<servlet-name>BuyApp</servlet-name>
+  	<servlet-class>controller.BuyAppServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>BuyApp</servlet-name>
+  	<url-pattern>/buyApp</url-pattern>  	
   </servlet-mapping>
    <resource-ref>
       <description>DB Connection</description>

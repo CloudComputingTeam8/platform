@@ -1,5 +1,6 @@
 package controller;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.jar.*;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import model.AppBean;
+import model.AppDetailBean;
 import model.DBDriver;
 import model.UserBean;
 import platform.*;
@@ -22,6 +25,7 @@ import platform.*;
 public class UploadAppServlet extends HttpServlet {
 	 private static final String SAVE_DIR = "uploadedFiles";
 	 private static final String destdir = "extractorFile";
+	 private static final String imagedir = "imageFile";
 	 private DBDriver driver;
 	 private static String successURL = "index.jsp";
 
@@ -57,12 +61,26 @@ public class UploadAppServlet extends HttpServlet {
 			 part.write(savePath + File.separator + fileName);
 			 extractor(savePath + File.separator + fileName,extractorPath);
 			 
+			 String imagePath = appPath + File.separator + imagedir;
+			 File imageSaveDir = new File(imagePath);
+			 if (!imageSaveDir.exists())
+				 imageSaveDir.mkdir();
+			 part = req.getPart("image");
+			 fileName = extractFileName(part);
+			 part.write(imagePath + File.separator + fileName);
+			 
+			 
+			 
 			 HttpSession session = req.getSession();
 			 UserBean user = (UserBean) session.getAttribute("user");
+			 int appID=0;
 			 try {
 				 driver = new DBDriver();
-				 String query = String.format("INSERT INTO appinfo (name, owned) VALUES ('%s', '%d')", appname, user.getUserID());
-				 driver.executeAddQuery(query);							
+				 String query = String.format("INSERT INTO appinfo (name, owned, image) VALUES ('%s', '%d', '%s')", appname, user.getUserID(),fileName);
+				 driver.executeAddQuery(query);	
+				 query = "SELECT appID  FROM appinfo WHERE owned = "+user.getUserID();
+				 ResultSet result = driver.executeQuery(query);
+				 appID = result.getInt("appID");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,9 +94,12 @@ public class UploadAppServlet extends HttpServlet {
 					RequestDispatcher rd = req.getRequestDispatcher(successURL);
 					rd.forward(req, res);
 				}
-			 //Platform plat = new Platform();
-			 //plat.setAppDirectory(extractorPath);
-			 //plat.run();
+			 
+			 AppDetailBean app = new AppDetailBean(appname,user.getUsername(),0,appID,"Running",0,0,fileName);
+			 user.getMyApps().add(app);
+			 List<AppBean> allApps = (List<AppBean>) session.getAttribute("appOverview");
+			 app.setAuthorisation(true);
+			 allApps.add(app);
 	 }
 	 
 	 public void extractor(String jarpath, String extractorPath)  throws IOException{

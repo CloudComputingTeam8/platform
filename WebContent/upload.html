@@ -1,63 +1,80 @@
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
-    <link href="css/stylesmine.css" rel="stylesheet" type="text/css">
-  </head><body>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Upload Page</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h4>Choose a image as the logo of application
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded" height="400" width="400">
-            <div>
-            <a class="btn btn-primary">Upload a Icon Image</a>
-          </div>
-          </div>
-          <div class="col-md-6">
-            <form role="form">
-              <div class="form-group has-feedback">
-                <!-- <label class="control-label" for="exampleInputEmail1">Description</label> -->
-                <h4>Brife description of application</h4>
-                <textarea rows="10" cols="30" onKeyDown="textdown(event)"
-    onKeyUp="textup()" onfocus="if(value=='200 words description'){value=''}"
-    onblur="if (value ==''){value='200 words description'}">200 words description</textarea>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <form class="form-horizontal" role="form">
-              <div class="form-group">
-                
-                <div class="col-sm-10">
-                  <h2>Choose your file of application here.</h2>
-                  <input type="file" class="file" id="inputappfile" placeholder="appfile">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/upload.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
+        <link href="css/stylesmine.css" rel="stylesheet" type="text/css">
+    </head><body>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Upload Page</h1>
+                    </div>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <a class="btn btn-primary">Submit</a>
-          </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                    <!-- 
+                        <h4>Choose a image as the logo of application</h4>
+                        <br>
+                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded" height="200" width="200">
+                        <div>
+                            <a class="btn btn-primary">Upload a Icon Image</a>
+                        </div>
+                    </div>
+                     -->
+                    <div class="col-md-12">
+                        <form role="form" method="post" action="upload" enctype="multipart/form-data">
+                            <div class="form-group has-feedback">
+                                <!-- <label class="control-label" for="exampleInputEmail1">Description</label> -->
+                                <h4>Brife description of application</h4>
+                                <textarea rows="10" cols="40" onkeydown="textdown(event)" onkeyup="textup()" onfocus="if(value=='200 words description'){value=''}" onblur="if (value ==''){value='200 words description'}">200 words description</textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Choose your file of application here.</h2>
+                        <input type="file" class="file" id="inputappfile" placeholder="appfile" name="file">
+                                
+                            
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form role="form">  
+                        <br> 
+                        <h2><br> Please set your App name</h2>     
+
+                            <input class="form-control" id="Inputappname" placeholder="Enter app name" name="appName">
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form role="form">  
+                        <br> 
+                        <h2><br> Please set a price</h2>     
+
+                            <input name="price" id="price" class="form-control" id="Inputappname" placeholder="100" onkeydown="onlyNum();" style="ime-mode:Disabled">Peanuts
+                        </form> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary">Submit</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  
+    
 
 </body></html>
