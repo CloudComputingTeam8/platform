@@ -109,6 +109,16 @@ hr {
   box-sizing: content-box;
   height: 0;
 }
+label#username_msg {
+    color: red;
+}
+label#pwd_msg {
+    color: red;
+}
+label#pwdRepeat_msg {
+    color: red;
+}
+
 pre {
   overflow: auto;
 }

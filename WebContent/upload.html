@@ -13,6 +13,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Upload Page</h1>
+                        <!--This is the upload page to add a new app to platform-->
                     </div>
                 </div>
             </div>
@@ -21,56 +22,33 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                    <!-- 
-                        <h4>Choose a image as the logo of application</h4>
-                        <br>
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded" height="200" width="200">
-                        <div>
-                            <a class="btn btn-primary">Upload a Icon Image</a>
-                        </div>
-                    </div>
-                     -->
-                    <div class="col-md-12">
-                        <form role="form" method="post" action="upload" enctype="multipart/form-data">
+                     <form role="form" method="post" action="upload" enctype="multipart/form-data">
                             <div class="form-group has-feedback">
+                        <h2>Choose a image as the logo of application</h2>
+                        <br>
+                        <img id="uploadimage" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded" height="200" width="200">
+                        
+                           <input name="image" type="file" class="file" id="inputappimage" placeholder="image" accept="image/*" onchange="loadFile(event)">
+                       
                                 <!-- <label class="control-label" for="exampleInputEmail1">Description</label> -->
-                                <h4>Brife description of application</h4>
-                                <textarea rows="10" cols="40" onkeydown="textdown(event)" onkeyup="textup()" onfocus="if(value=='200 words description'){value=''}" onblur="if (value ==''){value='200 words description'}">200 words description</textarea>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+                                <h2>Brife description of application</h2>
+                                <textarea name = "description" rows="10" cols="40" onkeydown="textdown(event)" onkeyup="textup()" onfocus="if(value=='200 words description'){value=''}" onblur="if (value ==''){value='200 words description'}">200 words description</textarea>
                         <h2>Choose your file of application here.</h2>
                         <input type="file" class="file" id="inputappfile" placeholder="appfile" name="file">
-                                
-                            
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <form role="form">  
                         <br> 
                         <h2><br> Please set your App name</h2>     
 
                             <input class="form-control" id="Inputappname" placeholder="Enter app name" name="appName">
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <form role="form">  
                         <br> 
                         <h2><br> Please set a price</h2>     
-
                             <input name="price" id="price" class="form-control" id="Inputappname" placeholder="100" onkeydown="onlyNum();" style="ime-mode:Disabled">Peanuts
+                            
+                         <h2><br> App type:</h2>
+                            <input type="radio" name="type" value="Java App" /> Java App
+                            <input type="radio" name="type" value="Web App" /> Web App
+                        <br><br>
+                        <input id="lastsubmit" type="submit" value="Submit App">
                         </form> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <a class="btn btn-primary">Submit</a>
                     </div>
                 </div>
             </div>

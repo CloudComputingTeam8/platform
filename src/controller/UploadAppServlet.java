@@ -1,6 +1,5 @@
 package controller;
 import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.jar.*;
@@ -11,16 +10,26 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import model.AppBean;
-import model.AppDetailBean;
-import model.DBDriver;
-import model.UserBean;
-import platform.*;
+import model.*;
 
 @WebServlet("/upload")
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 	maxFileSize=1024*1024*10, // 10MB
 	maxRequestSize=1024*1024*50) // 50MB
+
+/*
+ * controller.UploadAppServlet.java  	1.0 05/05/2016
+ * Assignment of COM6519 Cloud Computing
+ * Written by Wenyi Hu (acp15wh)
+ * 
+ * Upload App Servlet
+ * handle the upload action,
+ * upload the zip file as a .jar or .war extension,
+ * extractor the file and save it under the path of the app name
+ * update database
+ * goes to dashboard
+ * 
+ */
 
 public class UploadAppServlet extends HttpServlet {
 	 private static final String SAVE_DIR = "uploadedFiles";
@@ -29,28 +38,13 @@ public class UploadAppServlet extends HttpServlet {
 	 private DBDriver driver;
 	 private static String successURL = "index.jsp";
 
-	 private String extractFileName(Part part) {
-		 String contentDisp = part.getHeader("content-disposition");
-		 System.out.println("contentDisp: "+contentDisp);
-		 String[] items = contentDisp.split(";");
-		 for (String s : items) {
-			 if (s.trim().startsWith("filename")) {
-				 String name = s.substring(s.lastIndexOf("\\")+1, s.length()-1);
-				 System.out.println(name);
-				 return name;
-			 }
-		 }
-		 return "";
-	 }
-
 	 public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		 String appname = req.getParameter("appName");
 			 // Get absolute path of this running web application
 			 String appPath = req.getServletContext().getRealPath("");
-			 // Create path to the directory to save uploaded file
+			 // Create path to the directory to save uploaded file, and extract file
 			 String savePath = appPath + File.separator + SAVE_DIR;
-			 String extractorPath = appPath + File.separator + destdir;
-			 System.out.println("save path: "+savePath);
+			 String extractorPath = appPath + File.separator + destdir + File.separator + appname;
 			 // Create the save directory if it does not exist
 			 File fileSaveDir = new File(savePath);
 			 if (!fileSaveDir.exists())
@@ -61,6 +55,7 @@ public class UploadAppServlet extends HttpServlet {
 			 part.write(savePath + File.separator + fileName);
 			 extractor(savePath + File.separator + fileName,extractorPath);
 			 
+			 //save the icon image of the app
 			 String imagePath = appPath + File.separator + imagedir;
 			 File imageSaveDir = new File(imagePath);
 			 if (!imageSaveDir.exists())
@@ -69,39 +64,56 @@ public class UploadAppServlet extends HttpServlet {
 			 fileName = extractFileName(part);
 			 part.write(imagePath + File.separator + fileName);
 			 
-			 
-			 
+			 //update the session and database
+			 String description = req.getParameter("description");
+			 int price = Integer.parseInt(req.getParameter("price"));
+			 String type = req.getParameter("type");			 
 			 HttpSession session = req.getSession();
 			 UserBean user = (UserBean) session.getAttribute("user");
 			 int appID=0;
 			 try {
 				 driver = new DBDriver();
-				 String query = String.format("INSERT INTO appinfo (name, owned, image) VALUES ('%s', '%d', '%s')", appname, user.getUserID(),fileName);
-				 driver.executeAddQuery(query);	
-				 query = "SELECT appID  FROM appinfo WHERE owned = "+user.getUserID();
-				 ResultSet result = driver.executeQuery(query);
-				 appID = result.getInt("appID");
+				 String query = String.format("INSERT INTO appinfo (name, owned, image, price, description, status) VALUES ('%s','%d','%s','%d','%s','%s')", 
+						 appname, user.getUserID(),fileName,price,description,type);
+				 appID = driver.executeAddQuery(query);			 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				finally {
-					if(driver != null)
-						try {
-							driver.close();
-						} catch (SQLException e) {
+			//close DB connection
+			 finally {
+				 if(driver != null)
+					 try {
+						 driver.close();
+						 } catch (SQLException e) {
 							e.printStackTrace();
 						}
-					RequestDispatcher rd = req.getRequestDispatcher(successURL);
-					rd.forward(req, res);
-				}
-			 
-			 AppDetailBean app = new AppDetailBean(appname,user.getUsername(),0,appID,"Running",0,0,fileName);
+				 }			 
+			 AppDetailBean app = new AppDetailBean(appname,user.getUsername(),price,appID,type,0,0,fileName,description);
 			 user.getMyApps().add(app);
 			 List<AppBean> allApps = (List<AppBean>) session.getAttribute("appOverview");
 			 app.setAuthorisation(true);
 			 allApps.add(app);
+			 RequestDispatcher rd = req.getRequestDispatcher(successURL);
+			 rd.forward(req, res);
 	 }
 	 
+	 //extract file name
+	 private String extractFileName(Part part) {
+		 String contentDisp = part.getHeader("content-disposition");
+		 System.out.println("contentDisp: "+contentDisp);
+		 String[] items = contentDisp.split(";");
+		 for (String s : items) {
+			 if (s.trim().startsWith("filename")) {
+				 //String name = s.substring(s.lastIndexOf("\\")+1, s.length()-1); //for eclipse version
+				 String name =  s.substring(s.indexOf("=") + 2, s.length()-1); //for tomcat version
+				 System.out.println(name);
+				 return name;
+			 }
+		 }
+		 return "";
+	 }
+	 
+	 //extract the file
 	 public void extractor(String jarpath, String extractorPath)  throws IOException{
 		 JarFile jarfile = new JarFile(jarpath);
 		 for (Enumeration<JarEntry> iter = jarfile.entries(); iter.hasMoreElements();) {

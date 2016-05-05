@@ -21,6 +21,9 @@ html {
 body {
   margin: 0;
 }
+a#lastten{
+	position:static;
+}
 article,
 aside,
 details,
@@ -62,6 +65,29 @@ input[type="checkbox"] {
 input#price {
     width: 100px;
     margin-right: 10px;
+}
+input#lastsubmit {
+    width: 200px;
+    height: 30px;
+    color: #999999;
+    background-color: #f0ad4e;
+    font-weight: bold;
+}
+h4#hd {
+    font-family: cursive;
+    font-size: 30px;
+    margin-top: 80px;
+}
+p#descrption {
+    font-family: monospace;
+    font-size: large;
+    background-color: azure;
+    margin-right: 100px;
+}
+li#fdes {
+    font-family: cursive;
+    font-size: large;
+    font-weight: 700;
 }
 a {
   background-color: transparent;
@@ -192,7 +218,9 @@ input[type="search"]::-webkit-search-decoration {
 input#inputappfile {
     font-size: xx-large;
     padding-top: 10px;
+    padding-bottom: 50px;
     color: orange;
+}
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
@@ -1200,7 +1228,6 @@ hr {
 [role="button"] {
   cursor: pointer;
 }
-h1,
 h2,
 h3,
 h4,
@@ -1245,8 +1272,7 @@ h6 .small,
   line-height: 1;
   color: #777777;
 }
-h1,
-.h1,
+
 h2,
 .h2,
 h3,
@@ -1293,7 +1319,7 @@ h6 .small,
 }
 h1,
 .h1 {
-  font-size: 36px;
+  /*font-size: 36px;*/
 }
 h2,
 .h2 {
@@ -1621,8 +1647,8 @@ pre code {
 }
 .container-fluid {
   margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
+  /*margin-left: auto;
+  padding-left: 15px;*/
   padding-right: 15px;
 }
 .row {

@@ -34,13 +34,19 @@ public class DBDriver {
 		return res;
 	}
 	
-	public void executeAddQuery(String query) {
-		try {			
+	public int executeAddQuery(String query) {
+		int key = 0;
+		try { 
 			stmt.execute(query);
+			query = "SELECT LAST_INSERT_ID() AS id";
+			res = stmt.executeQuery(query);
+			if(res.next())
+				key = res.getInt("id"); 
 		}
 		catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+		return key;
 	}
 
 	public void close() throws SQLException{

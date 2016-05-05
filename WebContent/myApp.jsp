@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,12 +20,14 @@
         <div class="span12">
           <div class="page-header">
             <h1>Sheffield Cloudbase
+              <!--This is the page to show the developers' applications-->
               <small>My Apps</small>
             </h1>
           </div>
         </div>
       </div>
       <div class="row-fluid">
+        <!--The left nav bar-->
         <div class="span3">
           <ul class="nav nav-list well">
             <li class="nav-header">Hello, <%=user.getUsername() %></li>
@@ -39,7 +41,7 @@
             <a href="MyAccount.jsp"><span class="glyphicon glyphicon-home"> My Account</span></a>
             <li class="divider"></li>
             <li>
-              <a href="LogIn.html">Log Out</a>
+              <a href="/CloudComputingTeam8/logout">Log Out</a>
             </li>
           </ul>
         </div>
@@ -48,8 +50,11 @@
             <div class="row-fluid">
               <div class="span12">
                 <div class="btn-group">
-                  <a href="uploadApp.html" class="btn btn-default">+ Add</a>
-                  <a href="#" class="btn btn-default">- Remove</a>
+                <form name="input" action="deleteApp" method="post">
+                  <!--go to a upload page to uploadd a new app OR Delete apps-->
+                  <a href="upload.html" class="btn btn-default">+ Add</a>
+                  
+                  <input type = "submit" value="- Remove" class="btn btn-default"/>
                   <!--<a href="#" class="btn btn-default">Right</a>-->
                 </div>
               </div>
@@ -59,9 +64,11 @@
             <div class="container-fluid" id="LG">
               <div class="row-fluid">
                 <div class="span12">
+                  <!--The table show some basic information of applications-->
                   <table class="table table-bordered table-hover table-condensed">
                     <thead>
                       <tr>
+                      <th>#</th>
                         <th>Name</th>
                         <th>Status</th>
                         <th>PV</th>
@@ -70,36 +77,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a href="appdetail.html">app0</a></td>
-                        <td>Running</td>
-                        <td>777</td>
-                        <td>1</td>
-                        <td>50</td>
-                      </tr>
+                    
                      <%
                  	List<AppDetailBean> myApps = user.getMyApps();
                      for(AppDetailBean app:myApps){
                     		String statusLabel = "success";
                     		
                     		switch(app.getStatus()){
-                    		case "Pause":
-                    			statusLabel = "warning";break;
-                    		case "Stop":
+                    		case "Delete":
                     			statusLabel = "error";break;
                     			default:
                     				statusLabel = "success";                    				
                     		}
-                    		
-                    		/*
-                    		String status = app.getStatus();
-                    		if(status.equals("Pause"))
-                    			statusLabel = "warning";
-                    		else if(status.equals("Stop"))
-                    			statusLabel = "error";
-                    		*/
                       %>
                       <tr class=<%=  statusLabel%>>
+                      <td><input type="checkbox" name="delete" id=<%="checkbox_id"+app.getAppID() %> value=<%=app.getAppID() %>></td>
                         <td><%= app.getName() %></td>
                         <td><%= app.getStatus() %></td>
                         <td><%= app.getPV() %></td>
@@ -107,6 +99,7 @@
                         <td><%= app.getIncome() %></td>
                       </tr>
                       <%} %>
+                      </form>
                     </tbody>
                   </table>
                 </div>
