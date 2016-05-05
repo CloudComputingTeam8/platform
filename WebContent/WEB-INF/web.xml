@@ -88,10 +88,6 @@
         <param-value>/login,/LogIn.jsp</param-value>
     </init-param>
 </filter>        
-<filter-mapping>
-    <filter-name>ApplicationInsightsWebFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
   <filter-mapping>
     <filter-name>loginFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
