@@ -13,10 +13,10 @@
           <div class="col-md-3">
          
             <div class="tabbable" id="tabs-724690">
-             ${error}
             <!--  there is a nav tab bar that can choose log in or sign up -->
               <ul class="nav nav-tabs">
-              
+              <!--  there is a nav tab bar that can choose log in or sign up -->
+              <p id="errome">${error}</p>
                 <li class="active">
                   <a href="#panel-724981" data-toggle="tab">Log In</a>
                 </li>

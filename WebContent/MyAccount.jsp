@@ -34,14 +34,15 @@
             <li>
               <a href="index.jsp"> All Apps</a>
             </li>
-            <li>
-              <a href="myApp.jsp"> My Apps</a>
-            </li>
-				<%if(user.getAuthorisation()==2){ %>
+            <%if(user.getAuthorisation()==2){ %>
 				<li>
-					<a href="myApp.jsp">My Apps</a>
+					<a href="myApp.jsp">My App</a>
 				</li>
-				<%} %>
+			<%} %>
+            <li>
+              <a href="myAccount.jsp"> My Account</a>
+            </li>
+
             <li class="divider"></li>
             <li>
               <a href="/CloudComputingTeam8/logout">Log Out</a>
@@ -127,13 +128,6 @@
                     $(document).ready(transaction(mycars,max));                        
                         </script>
                         
-                
-              <%if(user.getAuthorisation()==2){ %>
-              Storage <p>
-                <strong>Left: 1G</strong>
-              </p><br>
-              <img alt="200x200" src="data/storage.png">
-              <%} %>
             </div>
           </div>
         </div>

@@ -3,19 +3,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/upload.js"></script>
 	<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
    	<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
    	<link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
    	<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
 	<title>Welcome to Sheffield Cloudbase</title>
+	
+
 </head>
+
 
 <body>
 <%@ page import="model.*,java.util.List"%>
 <% UserBean user = (UserBean)session.getAttribute("user");%>
-<div class="container-fluid" id="LG">
+<div class="container-fluid" id="LD">
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="page-header">
@@ -114,8 +118,8 @@ for(AppBean app:apps) {
 		</div>
 	</div>
 </div>
-<script>
-
-</script>
+<%if(request.getAttribute("error")!=null){ %>
+<script>alert("Not enough Peanut! Please top up! ")</script>
+<% }%>
 </body>
 </html>

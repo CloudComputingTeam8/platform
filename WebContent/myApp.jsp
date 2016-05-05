@@ -32,13 +32,13 @@
           <ul class="nav nav-list well">
             <li class="nav-header">Hello, <%=user.getUsername() %></li>
             <li>
-              <a href="index.jsp"><span class="glyphicon glyphicon-folder-open"> All Apps</span></a>
+              <a href="index.jsp"><span> All Apps</span></a>
             </li>
             <li></li>
             <li class="active">
-              <a href="#"><span class="glyphicon glyphicon-folder-open"> My Apps</span></a>
+              <a href="#"><span> My Apps</span></a>
             </li>
-            <a href="MyAccount.jsp"><span class="glyphicon glyphicon-home"> My Account</span></a>
+            <a href="MyAccount.jsp"><span> My Account</span></a>
             <li class="divider"></li>
             <li>
               <a href="/CloudComputingTeam8/logout">Log Out</a>
@@ -92,7 +92,12 @@
                       %>
                       <tr class=<%=  statusLabel%>>
                       <td><input type="checkbox" name="delete" id=<%="checkbox_id"+app.getAppID() %> value=<%=app.getAppID() %>></td>
-                        <td><%= app.getName() %></td>
+                      
+                        <td>
+                        <%if(!app.getStatus().equals("Delete")){ %>
+                        <a href="/CloudComputingTeam8/AppDetail.jsp?appID=<%=app.getAppID()%>" target="_blank"><%=app.getName() %></a>
+                        <%} else{ out.print(app.getName());} %></td>
+                        
                         <td><%= app.getStatus() %></td>
                         <td><%= app.getPV() %></td>
                         <td><%= app.getPrice() %></td>
