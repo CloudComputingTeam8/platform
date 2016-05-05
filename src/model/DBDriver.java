@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.Enumeration;
 
 public class DBDriver {
-	private static String urlDB = "jdbc:mysql://localhost:3306/new_schema",
-			userDB = "root",
-			passwordDB = "11111111";
+	private static String urlDB = "jdbc:mysql://eu-cdbr-azure-west-d.cloudapp.net:3306/new_schema",
+			userDB = "b1a4fabde0bc42",
+			passwordDB = "486075c3";
 	private Connection con;
 	private Statement stmt;
 	private  ResultSet res;
